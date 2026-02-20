@@ -1,0 +1,103 @@
+{
+  "kind": "spec_vs_diff_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-20T19:22:47.529Z",
+  "summary": "The implementation covers most requirements for AI-powered personalized task generation with user profiles and progressive difficulty. Backend data models, frontend profile setup, AI personalization panel, and quest generation hooks are implemented. However, several critical features are incomplete or missing: automatic daily quest generation scheduling, comprehensive task history tracking, full voice integration for AI quests, and complete profile-to-dashboard integration.",
+  "missing_requirements": [
+    {
+      "id": "REQ-15",
+      "requirement": "Build AI task generation algorithm that analyzes user profile data to create personalized daily tasks spanning multiple categories (fitness, mental, productivity) with variety to prevent monotony",
+      "reason": "The generateTask function in backend/main.mo only generates generic task descriptions without true variety or analysis of user habits/lifestyle. Tasks are hardcoded templates, not personalized based on profile data beyond basic difficulty adjustment. No evidence of multiple task variety per category or monotony prevention logic.",
+      "evidence": [
+        "backend/main.mo"
+      ]
+    },
+    {
+      "id": "REQ-17",
+      "requirement": "Quest generation runs automatically at daily reset time",
+      "reason": "No scheduling mechanism, timer, or automatic trigger for daily quest generation is implemented. The useQuestGeneration hook only checks timestamps but doesn't schedule or trigger generation automatically at a specific reset time.",
+      "evidence": [
+        "frontend/src/hooks/useQuestGeneration.ts",
+        "backend/main.mo"
+      ]
+    },
+    {
+      "id": "REQ-17",
+      "requirement": "Users cannot dismiss or opt-out of AI-generated quests",
+      "reason": "No evidence of enforcement preventing users from dismissing AI-generated quests. The DailyQuests component shows quests but doesn't implement non-dismissible logic.",
+      "evidence": [
+        "frontend/src/components/DailyQuests.tsx"
+      ]
+    },
+    {
+      "id": "REQ-18",
+      "requirement": "Track success/failure rates per task category",
+      "reason": "QuestLog tracks completed and failed quests as arrays but doesn't aggregate success/failure rates per task category (exercise, nutrition, mindfulness, etc.). No category-level statistics are calculated or stored.",
+      "evidence": [
+        "backend/main.mo"
+      ]
+    },
+    {
+      "id": "REQ-18",
+      "requirement": "Record time-to-completion for tasks",
+      "reason": "Task completion mutations accept timestamps but there's no logic to calculate or store time-to-completion duration. The Task type has createdAt but no completedAt or duration tracking.",
+      "evidence": [
+        "backend/main.mo",
+        "frontend/src/hooks/useQueries.ts"
+      ]
+    },
+    {
+      "id": "REQ-18",
+      "requirement": "Maintain rolling window of recent performance (30 days minimum)",
+      "reason": "No rolling window logic or date-based filtering for performance history. QuestLog stores all completed/failed quests indefinitely without time-windowing or cleanup.",
+      "evidence": [
+        "backend/main.mo"
+      ]
+    },
+    {
+      "id": "REQ-18",
+      "requirement": "History influences difficulty scaling decisions",
+      "reason": "The generateTask function adjusts difficulty based on profile.level but doesn't query or analyze task history to inform scaling decisions. No connection between completion history and difficulty algorithm.",
+      "evidence": [
+        "backend/main.mo"
+      ]
+    },
+    {
+      "id": "REQ-19",
+      "requirement": "Users can query their AI-generated quests via voice",
+      "reason": "Voice commands handle 'show ai quests' and 'list generated quests' with toast notifications but don't actually announce quest details via TTS. The speakAIQuests function exists but isn't integrated with voice command processing.",
+      "evidence": [
+        "frontend/src/hooks/useVoiceRecognition.ts",
+        "frontend/src/hooks/useTextToSpeech.ts"
+      ]
+    },
+    {
+      "id": "REQ-20",
+      "requirement": "Quick access to edit profile settings",
+      "reason": "ProfileSummary has an Edit button, but there's no evidence it's displayed on the main dashboard consistently. Dashboard.tsx conditionally renders ProfileSummary only when isProfileComplete is true, potentially hiding access after initial setup.",
+      "evidence": [
+        "frontend/src/pages/Dashboard.tsx",
+        "frontend/src/components/ProfileSummary.tsx"
+      ]
+    }
+  ],
+  "hallucinated_features": [],
+  "confidence": 0.85,
+  "changed_files": [
+    "backend/main.mo",
+    "frontend-file-summaries.txt",
+    "frontend/src/App.tsx",
+    "frontend/src/components/AIPersonalizationPanel.tsx",
+    "frontend/src/components/DailyQuests.tsx",
+    "frontend/src/components/ProfileSetup.tsx",
+    "frontend/src/components/ProfileSummary.tsx",
+    "frontend/src/hooks/useDifficultyProgression.ts",
+    "frontend/src/hooks/useProfile.ts",
+    "frontend/src/hooks/useQueries.ts",
+    "frontend/src/hooks/useQuestGeneration.ts",
+    "frontend/src/hooks/useTextToSpeech.ts",
+    "frontend/src/hooks/useVoiceRecognition.ts",
+    "frontend/src/pages/Dashboard.tsx",
+    "project_state.json"
+  ]
+}

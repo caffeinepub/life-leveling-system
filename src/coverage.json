@@ -1,0 +1,135 @@
+{
+  "kind": "coverage_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-20T19:22:47.532Z",
+  "sources": {
+    "buildRequest": true,
+    "implementationPlan": true
+  },
+  "requirements": {
+    "total": 8,
+    "implemented": 4,
+    "items": [
+      {
+        "id": "REQ-13",
+        "summary": "Create user profile setup interface with questionnaire capturing physical capabilities (fitness level, mobility, endurance), health conditions (injuries, limitations, chronic conditions), current habits (sleep schedule, exercise frequency, work schedule), and lifestyle preferences",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/ProfileSetup.tsx",
+          "frontend/src/components/ProfileSummary.tsx",
+          "frontend/src/pages/Dashboard.tsx",
+          "frontend/src/hooks/useProfile.ts"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/ProfileSetup.tsx",
+          "frontend/src/components/ProfileSummary.tsx",
+          "frontend/src/pages/Dashboard.tsx",
+          "frontend/src/hooks/useProfile.ts"
+        ]
+      },
+      {
+        "id": "REQ-14",
+        "summary": "Implement backend data model for storing user profile information including physical capabilities, health conditions, habits, and preferences with persistent storage",
+        "status": "unknown",
+        "plannedFiles": [],
+        "matchedFiles": []
+      },
+      {
+        "id": "REQ-15",
+        "summary": "Build AI task generation algorithm that analyzes user profile data (fitness level, health conditions, habits) to create personalized daily tasks appropriate for the user's current capabilities",
+        "status": "unknown",
+        "plannedFiles": [],
+        "matchedFiles": []
+      },
+      {
+        "id": "REQ-16",
+        "summary": "Implement progressive difficulty scaling system that tracks user completion history, current level, and stat improvements to automatically increase task challenge over time",
+        "status": "unknown",
+        "plannedFiles": [],
+        "matchedFiles": []
+      },
+      {
+        "id": "REQ-17",
+        "summary": "Create automatic daily quest generation that converts AI-generated tasks into mandatory daily quests in the user's quest log each day",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/DailyQuests.tsx",
+          "frontend/src/hooks/useQuestGeneration.ts",
+          "frontend/src/pages/Dashboard.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/DailyQuests.tsx",
+          "frontend/src/hooks/useQuestGeneration.ts",
+          "frontend/src/pages/Dashboard.tsx"
+        ]
+      },
+      {
+        "id": "REQ-18",
+        "summary": "Add backend task history tracking system that stores completion data, performance metrics, and timestamps to inform future AI task generation",
+        "status": "unknown",
+        "plannedFiles": [],
+        "matchedFiles": []
+      },
+      {
+        "id": "REQ-19",
+        "summary": "Integrate AI-generated quests with existing voice control system allowing users to complete AI quests via voice commands",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/hooks/useVoiceRecognition.ts",
+          "frontend/src/hooks/useTextToSpeech.ts",
+          "frontend/src/components/DailyQuests.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/hooks/useVoiceRecognition.ts",
+          "frontend/src/hooks/useTextToSpeech.ts",
+          "frontend/src/components/DailyQuests.tsx"
+        ]
+      },
+      {
+        "id": "REQ-20",
+        "summary": "Display user profile summary and AI personalization status on dashboard showing current fitness level, active limitations, and next difficulty progression milestone",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/AIPersonalizationPanel.tsx",
+          "frontend/src/pages/Dashboard.tsx",
+          "frontend/src/hooks/useDifficultyProgression.ts",
+          "frontend/src/components/ProfileSummary.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/AIPersonalizationPanel.tsx",
+          "frontend/src/pages/Dashboard.tsx",
+          "frontend/src/hooks/useDifficultyProgression.ts",
+          "frontend/src/components/ProfileSummary.tsx"
+        ]
+      }
+    ]
+  },
+  "changedFiles": [
+    "backend/main.mo",
+    "build-request.json",
+    "build-template/README.md",
+    "feature_evidence.json",
+    "frontend-file-summaries.txt",
+    "frontend-implementation-plan.json",
+    "frontend/src/App.tsx",
+    "frontend/src/backend.d.ts",
+    "frontend/src/backend.ts",
+    "frontend/src/components/AIPersonalizationPanel.tsx",
+    "frontend/src/components/DailyQuests.tsx",
+    "frontend/src/components/ProfileSetup.tsx",
+    "frontend/src/components/ProfileSummary.tsx",
+    "frontend/src/declarations/backend.did.d.ts",
+    "frontend/src/declarations/backend.did.js",
+    "frontend/src/hooks/useDifficultyProgression.ts",
+    "frontend/src/hooks/useProfile.ts",
+    "frontend/src/hooks/useQueries.ts",
+    "frontend/src/hooks/useQuestGeneration.ts",
+    "frontend/src/hooks/useTextToSpeech.ts",
+    "frontend/src/hooks/useVoiceRecognition.ts",
+    "frontend/src/pages/Dashboard.tsx",
+    "project_state.json",
+    "scratch/component-selection.json",
+    "spec.md",
+    "spec_vs_diff_report.json"
+  ]
+}

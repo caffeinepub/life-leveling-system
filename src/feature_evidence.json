@@ -1,0 +1,87 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-create-user-profile-setup-interface-with-questionnaire-capturing-physical-capabilities-fitness-level-mobility-endurance-health-conditions-injuries-limitations-chronic-conditions-current-habits-sleep-schedule-exercise-frequency-work-schedule-and-lifestyle-preferences",
+      "featureTitle": "Create user profile setup interface with questionnaire capturing physical capabilities (fitness level, mobility, endurance), health conditions (injuries, limitations, chronic conditions), current habits (sleep schedule, exercise frequency, work schedule), and lifestyle preferences",
+      "files": [
+        "frontend/src/components/ProfileSetup.tsx",
+        "frontend/src/components/ProfileSummary.tsx",
+        "frontend/src/hooks/useProfile.ts",
+        "frontend/src/pages/Dashboard.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-13"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-create-automatic-daily-quest-generation-that-converts-ai-generated-tasks-into-mandatory-daily-quests-in-the-user-s-quest-log-each-day",
+      "featureTitle": "Create automatic daily quest generation that converts AI-generated tasks into mandatory daily quests in the user's quest log each day",
+      "files": [
+        "frontend/src/components/DailyQuests.tsx",
+        "frontend/src/hooks/useQuestGeneration.ts",
+        "frontend/src/pages/Dashboard.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-17"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-integrate-ai-generated-quests-with-existing-voice-control-system-allowing-users-to-complete-ai-quests-via-voice-commands",
+      "featureTitle": "Integrate AI-generated quests with existing voice control system allowing users to complete AI quests via voice commands",
+      "files": [
+        "frontend/src/components/DailyQuests.tsx",
+        "frontend/src/hooks/useTextToSpeech.ts",
+        "frontend/src/hooks/useVoiceRecognition.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-19"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-display-user-profile-summary-and-ai-personalization-status-on-dashboard-showing-current-fitness-level-active-limitations-and-next-difficulty-progression-milestone",
+      "featureTitle": "Display user profile summary and AI personalization status on dashboard showing current fitness level, active limitations, and next difficulty progression milestone",
+      "files": [
+        "frontend/src/components/AIPersonalizationPanel.tsx",
+        "frontend/src/components/ProfileSummary.tsx",
+        "frontend/src/hooks/useDifficultyProgression.ts",
+        "frontend/src/pages/Dashboard.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-20"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

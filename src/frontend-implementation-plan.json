@@ -1,0 +1,130 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Add AI-powered personalized task generation with user profile and progressive difficulty",
+  "requirements": [
+    {
+      "id": "REQ-13",
+      "summary": "Create user profile setup interface with questionnaire capturing physical capabilities, health conditions, current habits, and lifestyle preferences",
+      "acceptanceCriteria": [
+        "Multi-step form or wizard interface for profile creation",
+        "Fields for fitness level (beginner/intermediate/advanced)",
+        "Input for health conditions and physical limitations",
+        "Current habits questionnaire (exercise, sleep, productivity patterns)",
+        "Profile data is saved and accessible for editing",
+        "Profile completion unlocks AI task generation"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/ProfileSetup.tsx",
+          "operation": "create",
+          "description": "Create multi-step profile setup wizard component with form sections for physical capabilities (fitness level, mobility, endurance, balance, strength, flexibility), health conditions (heart conditions, respiratory issues, joint issues, diabetes), current habits (activity level, sleep quality, diet quality, smoking, alcohol consumption), and lifestyle preferences (time availability, difficulty preference, exercise types). Include validation, progress indicators, and save functionality that calls updateUserProfile backend method with UserProfile type."
+        },
+        {
+          "path": "frontend/src/components/ProfileSummary.tsx",
+          "operation": "create",
+          "description": "Create profile summary display component showing current fitness level, active health limitations, habit summary, and edit profile button. Fetches profile data using getUserProfile backend method and provides navigation to ProfileSetup for editing."
+        },
+        {
+          "path": "frontend/src/pages/Dashboard.tsx",
+          "operation": "modify",
+          "description": "Add profile setup check on dashboard mount. If user profile is incomplete (getUserProfile returns null or missing required fields), display ProfileSetup component as modal or redirect. Add ProfileSummary component to dashboard layout in a dedicated panel alongside existing CharacterStats."
+        },
+        {
+          "path": "frontend/src/hooks/useProfile.ts",
+          "operation": "create",
+          "description": "Create React hook for profile management providing functions to fetch profile (getUserProfile), update profile (updateUserProfile), and check profile completion status. Use React Query for caching and automatic refetching. Return profile data, loading states, and mutation functions."
+        }
+      ]
+    },
+    {
+      "id": "REQ-17",
+      "summary": "Create automatic daily quest generation that converts AI-generated tasks into mandatory daily quests in the user's quest log each day",
+      "acceptanceCriteria": [
+        "System generates 3-5 personalized quests daily based on user profile",
+        "Generated quests automatically appear in the daily quests interface",
+        "Quests are marked as AI-generated with special indicator",
+        "Quest difficulty and XP rewards scale with user level",
+        "Quest generation runs automatically at daily reset time",
+        "Users cannot dismiss or opt-out of AI-generated quests"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/DailyQuests.tsx",
+          "operation": "modify",
+          "description": "Enhance quest display to show AI-generated indicator badge (e.g., sparkle icon or 'AI' label) for quests marked as AI-generated. Fetch quests using getQuestLog backend method and filter/display daily quests with special styling for AI-generated ones. Ensure AI-generated quests cannot be dismissed (hide delete button for these quests)."
+        },
+        {
+          "path": "frontend/src/hooks/useQuestGeneration.ts",
+          "operation": "create",
+          "description": "Create React hook to handle daily quest generation timing and status. Check if quests need generation by comparing current date with lastGenerated timestamp from QuestLog. Provide trigger function to request quest generation and poll getQuestLog for updates. Include automatic daily reset detection using local time comparison."
+        },
+        {
+          "path": "frontend/src/pages/Dashboard.tsx",
+          "operation": "modify",
+          "description": "Integrate useQuestGeneration hook to automatically trigger quest generation on dashboard mount if daily reset has occurred and profile is complete. Display loading state during generation and show toast notification when new AI quests are generated."
+        }
+      ]
+    },
+    {
+      "id": "REQ-19",
+      "summary": "Integrate AI-generated quests with existing voice control system allowing users to complete AI quests via voice commands",
+      "acceptanceCriteria": [
+        "Voice commands work with AI-generated quests",
+        "TTS announces AI-generated quest completions",
+        "Voice feedback indicates progressive difficulty increases",
+        "Users can query their AI-generated quests via voice"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/useVoiceRecognition.ts",
+          "operation": "modify",
+          "description": "Extend voice command patterns to recognize AI-generated quest completion commands (e.g., 'complete AI quest', 'finish generated quest [number]'). Add command to query AI quests ('show AI quests', 'list generated quests'). Map recognized commands to appropriate quest completion actions using existing quest completion backend methods."
+        },
+        {
+          "path": "frontend/src/hooks/useTextToSpeech.ts",
+          "operation": "modify",
+          "description": "Add specialized TTS announcements for AI-generated quest completions with enhanced feedback. Include voice announcements for difficulty progression milestones (e.g., 'Your fitness level has increased. Next quests will be more challenging'). Add function to read out current AI-generated quests when queried via voice."
+        },
+        {
+          "path": "frontend/src/components/DailyQuests.tsx",
+          "operation": "modify",
+          "description": "Integrate TTS feedback when AI-generated quests are completed. Trigger appropriate voice announcements using useTextToSpeech hook when quest completion succeeds. Ensure voice feedback distinguishes AI quests from regular quests."
+        }
+      ]
+    },
+    {
+      "id": "REQ-20",
+      "summary": "Display user profile summary and AI personalization status on dashboard showing current fitness level, active limitations, and next difficulty progression milestone",
+      "acceptanceCriteria": [
+        "Profile summary panel on main dashboard",
+        "Visual indicator of current difficulty level",
+        "Progress bar or metric showing progress toward next difficulty tier",
+        "Quick access to edit profile settings",
+        "Display of AI-generated quest stats (completion rate, streak)"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/AIPersonalizationPanel.tsx",
+          "operation": "create",
+          "description": "Create AI personalization status panel component showing current difficulty level indicator, progress toward next difficulty tier (calculated from completion history), AI quest completion statistics (completion rate, current streak), and visual progress bar. Fetch data using getUserProfile and getQuestLog backend methods. Include compact display of active health limitations and fitness level badge."
+        },
+        {
+          "path": "frontend/src/pages/Dashboard.tsx",
+          "operation": "modify",
+          "description": "Add AIPersonalizationPanel to dashboard layout positioned prominently near CharacterStats panel. Ensure panel is only visible when user profile is complete. Add quick access button to edit profile that opens ProfileSetup component in edit mode."
+        },
+        {
+          "path": "frontend/src/hooks/useDifficultyProgression.ts",
+          "operation": "create",
+          "description": "Create React hook to calculate and track difficulty progression metrics. Analyze QuestLog completion history to determine current difficulty tier, calculate progress percentage toward next tier based on recent completion rates and streak data. Return formatted metrics for display in AIPersonalizationPanel."
+        },
+        {
+          "path": "frontend/src/components/ProfileSummary.tsx",
+          "operation": "modify",
+          "description": "Enhance ProfileSummary component to display AI personalization status including difficulty level badge, active limitations summary, and edit profile button with clear call-to-action styling. Integrate with AIPersonalizationPanel for consistent difficulty display."
+        }
+      ]
+    }
+  ]
+}

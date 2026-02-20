@@ -1,0 +1,168 @@
+{
+  "kind": "build_request",
+  "title": "Add AI-powered personalized task generation with user profile and progressive difficulty",
+  "projectName": "Life Leveling System",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-13",
+      "text": "Create user profile setup interface with questionnaire capturing physical capabilities (fitness level, mobility, endurance), health conditions (injuries, limitations, chronic conditions), current habits (sleep schedule, exercise frequency, work schedule), and lifestyle preferences",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-recent"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Multi-step form or wizard interface for profile creation",
+        "Fields for fitness level (beginner/intermediate/advanced)",
+        "Input for health conditions and physical limitations",
+        "Current habits questionnaire (exercise, sleep, productivity patterns)",
+        "Profile data is saved and accessible for editing",
+        "Profile completion unlocks AI task generation"
+      ]
+    },
+    {
+      "id": "REQ-14",
+      "text": "Implement backend data model for storing user profile information including physical capabilities, health conditions, habits, and preferences with persistent storage",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-recent"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Motoko type definitions for UserProfile with all profile fields",
+        "Stable storage for user profiles that persists across upgrades",
+        "CRUD operations for profile management",
+        "Profile data validation and sanitization",
+        "Association between user identity and profile"
+      ]
+    },
+    {
+      "id": "REQ-15",
+      "text": "Build AI task generation algorithm that analyzes user profile data (fitness level, health conditions, habits) to create personalized daily tasks appropriate for the user's current capabilities",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-recent"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Task generation considers user's fitness level and health limitations",
+        "Tasks align with user's stated habits and lifestyle",
+        "Generated tasks span multiple categories (fitness, mental, productivity)",
+        "Tasks are actionable and time-bounded",
+        "Variety in generated tasks to prevent monotony"
+      ]
+    },
+    {
+      "id": "REQ-16",
+      "text": "Implement progressive difficulty scaling system that tracks user completion history, current level, and stat improvements to automatically increase task challenge over time",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-recent"
+        ]
+      },
+      "acceptanceCriteria": [
+        "System tracks completion rates and patterns for each user",
+        "Task difficulty increases when user consistently completes tasks",
+        "Difficulty scaling respects user's physical limitations from profile",
+        "Tasks become more challenging as user's stats improve",
+        "Adaptive pacing prevents burnout from too-rapid progression",
+        "Algorithm considers recent performance (last 7-14 days)"
+      ]
+    },
+    {
+      "id": "REQ-17",
+      "text": "Create automatic daily quest generation that converts AI-generated tasks into mandatory daily quests in the user's quest log each day",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-recent"
+        ]
+      },
+      "acceptanceCriteria": [
+        "System generates 3-5 personalized quests daily based on user profile",
+        "Generated quests automatically appear in the daily quests interface",
+        "Quests are marked as AI-generated with special indicator",
+        "Quest difficulty and XP rewards scale with user level",
+        "Quest generation runs automatically at daily reset time",
+        "Users cannot dismiss or opt-out of AI-generated quests"
+      ]
+    },
+    {
+      "id": "REQ-18",
+      "text": "Add backend task history tracking system that stores completion data, performance metrics, and timestamps to inform future AI task generation",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-recent"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Store completion timestamps for all tasks and quests",
+        "Track success/failure rates per task category",
+        "Record time-to-completion for tasks",
+        "Maintain rolling window of recent performance (30 days minimum)",
+        "Data is queryable by AI generation algorithm",
+        "History influences difficulty scaling decisions"
+      ]
+    },
+    {
+      "id": "REQ-19",
+      "text": "Integrate AI-generated quests with existing voice control system allowing users to complete AI quests via voice commands",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-recent"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Voice commands work with AI-generated quests",
+        "TTS announces AI-generated quest completions",
+        "Voice feedback indicates progressive difficulty increases",
+        "Users can query their AI-generated quests via voice"
+      ]
+    },
+    {
+      "id": "REQ-20",
+      "text": "Display user profile summary and AI personalization status on dashboard showing current fitness level, active limitations, and next difficulty progression milestone",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-recent"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Profile summary panel on main dashboard",
+        "Visual indicator of current difficulty level",
+        "Progress bar or metric showing progress toward next difficulty tier",
+        "Quick access to edit profile settings",
+        "Display of AI-generated quest stats (completion rate, streak)"
+      ]
+    }
+  ],
+  "constraints": [
+    "Do not integrate external AI/ML services (OpenAI, Anthropic, etc.)",
+    "Task generation must use rule-based algorithms only, not machine learning models",
+    "Do not modify immutable frontend paths (useInternetIdentity.ts, useActor.ts, main.tsx, components/ui)",
+    "Maintain single-actor Motoko backend architecture",
+    "Respect existing Web Speech API integration patterns",
+    "Keep Solo Leveling-inspired visual design consistent"
+  ],
+  "nonGoals": [
+    "True machine learning or neural network-based AI",
+    "Integration with external fitness tracking devices or APIs",
+    "Social features or task sharing between users",
+    "Real-time collaborative quest completion",
+    "Third-party authentication beyond Internet Identity",
+    "Nutrition tracking or meal planning features",
+    "Medical advice or health diagnosis capabilities"
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  }
+}
